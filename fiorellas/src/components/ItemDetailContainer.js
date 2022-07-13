@@ -33,28 +33,29 @@ const productsList = [
 ];
 
 function ItemDetailContainer() {
-  const [loading, setLoading] = useState(false);
+  const [loadedProductsList, setLoadedProductsList] = useState([]);
 
-  const task = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(true);
-    }, 3000);
-  });
+  function myPromise() {
+    return new Promise((resolve, reject) => {
+      let prueba = true;
+      setTimeout(() => {
+        if (prueba) {
+          resolve("resolved");
+        } else {
+          console.log("error:", reject);
+        }
+      }, 2000);
+    });
+  }
 
-  task.then(
-    (res) => {
-      setLoading(true);
-    },
-    (err) => {
-      console.log("error");
-    }
-  );
-
-  console.log("ItemDetailCont", productsList);
-
+  async function asyncCall() {
+    await myPromise();
+    setLoadedProductsList(productsList);
+  }
+  asyncCall();
   return (
     <>
-      {!loading ? (
+      {loadedProductsList.length === 0 ? (
         <p>Cargando...</p>
       ) : (
         <>
