@@ -1,12 +1,15 @@
 import React from "react";
 import CartWidget from "./CartWidget";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
-          <div className="navbar-brand">Fiorellas</div>
+          <Link to={`/`} style={{ textDecoration: "none" }}>
+            <div className="navbar-brand">Fiorellas</div>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -21,42 +24,28 @@ function NavBar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <div className="nav-link active" aria-current="page">
-                  Home
-                </div>
+                <Link to={`/category/rosas`}>
+                  <div className="nav-link">Rosas</div>
+                </Link>
               </li>
               <li className="nav-item">
-                <div className="nav-link">Link</div>
-              </li>
-              <li className="nav-item dropdown">
-                <div
-                  className="nav-link dropdown-toggle"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </div>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <div className="dropdown-item">Action</div>
-                  </li>
-                  <li>
-                    <div className="dropdown-item">Another action</div>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <div className="dropdown-item">Something else here</div>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item">
-                <div className="nav-link disabled">Disabled</div>
+                <Link to={`/category/girasoles`}>
+                  <div className="nav-link">Girasoles</div>
+                </Link>
               </li>
             </ul>
+            {/* <form className="d-flex" role="search">                 -------------------Borrar todo el boton de busqueda
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form> */}
+            {/* -------------Insertar CartWidget */}
             <CartWidget />
           </div>
         </div>

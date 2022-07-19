@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ItemDetail from "./ItemDetail";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const productsList = [
   {
@@ -34,33 +36,42 @@ const productsList = [
 
 function ItemDetailContainer() {
   const [loadedProductsList, setLoadedProductsList] = useState([]);
+  const { idItem } = useParams();
 
-  function myPromise() {
-    return new Promise((resolve, reject) => {
-      let prueba = true;
-      setTimeout(() => {
-        if (prueba) {
-          resolve("resolved");
-        } else {
-          console.log("error:", reject);
-        }
-      }, 2000);
-    });
-  }
+  useEffect(() => {
+    setLoadedProductsList([]);
+    function myPromise() {
+      return new Promise((resolve, reject) => {
+        let prueba = true;
+        setTimeout(() => {
+          if (prueba) {
+            resolve("resolved");
+          } else {
+            console.log("error:", reject);
+          }
+        }, 2000);
+      });
+    }
 
-  async function asyncCall() {
-    await myPromise();
-    setLoadedProductsList(productsList);
-  }
-  asyncCall();
+    async function asyncCall() {
+      await myPromise();
+      if (idItem === undefined) {
+        setLoadedProductsList(productsList);
+      } else {
+        setLoadedProductsList(
+          productsList.filter((product) => product.id === idItem)
+        );
+      }
+    }
+    asyncCall();
+  }, [idItem]);
   return (
     <>
       {loadedProductsList.length === 0 ? (
         <p>Cargando...</p>
       ) : (
         <>
-          <p>cargado</p>
-          {productsList.map((product) => {
+          {loadedProductsList.map((product) => {
             return <ItemDetail product={product} />;
           })}
         </>
