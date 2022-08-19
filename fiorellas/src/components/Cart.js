@@ -105,7 +105,10 @@ const Cart = () => {
                         <button
                           onClick={() => test.deleteItem(item.id)}
                           sx={{ fontSize: 45 }}
-                        />
+                          className="btn btn-danger"
+                        >
+                          Eliminar
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -143,7 +146,7 @@ const Cart = () => {
               <div className="col-sm-6">
                 <div className="text-sm-end">
                   <button
-                    className="mdi mdi-cart-plus m-2 btn btn-danger"
+                    className="mdi mdi-cart-plus m-2 btn btn-primary"
                     onClick={createOrder}
                   >
                     Comprar
